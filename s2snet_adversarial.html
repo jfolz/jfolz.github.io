@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      body {
+        /*font-family: 'Lato', sans-serif;*/
+        font-weight: 300;
+        color: #333;
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 40px;
+        color: #555;
+        font-weight: 400;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        margin-top: 50px;
+        margin-bottom: 10px;
+      }
+
+      .authors {
+        color: #222;
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 40px;
+      }
+      .authorsnote {
+        font-size: 14px;
+        text-align: center;
+      }
+      .logoimg {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .container-fluid {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .container {
+        margin-top: 30px;
+      }
+      #footer {
+        margin-bottom: 100px;
+      }
+      .thumbs {
+        -webkit-box-shadow: 1px 1px 3px #999;
+        -moz-box-shadow: 1px 1px 3px #999;
+        box-shadow: 1px 1px 3px #999;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 24px;
+        font-weight: 900;
+        border-bottom: 1px solid #999;
+        margin-bottom: 20px;
+      }
+
+      pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        word-break: break-all;
+        word-wrap: break-word;
+        color: #333;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      /* The ribbons */
+
+      .corner-ribbon{
+        width: 400px;
+        background: #e43;
+        position: absolute;
+        top: 25px;
+        left: -50px;
+        text-align: center;
+        line-height: 50px;
+        letter-spacing: 1px;
+        color: #f0f0f0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      /* Custom styles */
+
+      .corner-ribbon.sticky{
+        position: fixed;
+      }
+
+      .corner-ribbon.shadow{
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+      }
+
+      .corner-ribbon.top-left{
+        top: 70px;
+        left: -80px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+
+      .corner-ribbon.white{background: #f0f0f0; color: #555;}
+      .corner-ribbon.black{background: #333;}
+      .corner-ribbon.grey{background: #999;}
+      .corner-ribbon.blue{background: #39d;}
+      .corner-ribbon.green{background: #2c7;}
+      .corner-ribbon.turquoise{background: #1b9;}
+      .corner-ribbon.purple{background: #95b;}
+      .corner-ribbon.red{background: #e43;}
+      .corner-ribbon.orange{background: #e82;}
+      .corner-ribbon.yellow{background: #ec0;}
+      
+      #paperdiv img {
+        width: 10%;
+      }
+      
+      #defense p {
+        text-align: center;
+      }
+
+    </style>
+
+    <title>Adversarial Defense based on Structure-to-Signal Autoencoders (WACV 2020)</title>
+
+    <!-- SEO: the text snippet often shown beneath your search result below the title -->
+    <meta name="description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks).">
+
+     <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Adversarial Defense based on Structure-to-Signal Autoencoders (WACV 2020)" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://jfolz.github.io/s2snet_adversarial.html" />
+    <meta property="og:image" content="http://jfolz.github.io/img/gradients.png" />
+    <meta property="og:description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks)." />
+<!--  -->
+  </head>
+  <body>
+	<a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html">
+    <div class="corner-ribbon top-left sticky black shadow">No Adversaries Here!</div></a>
+    <div id="header" class="container">
+      <div class="row">
+        <div class="col">
+          <h1> Adversarial Defense based on Structure-to-Signal Autoencoders </h1>
+          <div class="authors">
+            <a href="http://jfolz.github.io">Joachim Folz</a>*,
+            <a href="http://spalaciob.github.io">Sebastian Palacio</a>*,
+            <a href="http://joernhees.de">Jörn Hees</a>,
+            <a href="http://www.dfki.uni-kl.de/~dengel">Andreas Dengel</a>
+            <div class="authorsnote">
+              * equal contribution
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <img src="img/dfki-logo.jpg" height="60">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="logoimg">
+            <img src="img/tukl-logo.jpg" height="60">
+          </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+
+    <div class="container" id="abstractdiv">
+      <h2>Abstract</h2>
+      <p class="abstract">
+        Adversarial attacks have exposed the intricacies of the complex loss surfaces approximated by neural networks. In this paper, we present a defense strategy against gradient-based attacks, on the premise that input gradients need to expose information about the semantic manifold for attacks to be successful. We propose an architecture based on compressive autoencoders (AEs) with a two-stage training scheme, creating not only an architectural bottleneck but also a representational bottleneck. We show that the proposed mechanism yields robust results against a collection of gradient-based attacks under challenging white-box conditions. This defense is attack-agnostic and can, therefore, be used for arbitrary pre-trained models, while not compromising the original performance. These claims are supported by experiments conducted with state-of-the-art image classifiers (ResNet50 and Inception v3), on the full ImageNet validation set. Experiments, including counterfactual analysis, empirically show that the robustness stems from a shift in the distribution of input gradients, which mitigates the effect of tested adversarial attack methods. Gradients propagated through the proposed AEs represent less semantic information and instead point to low-level structural features.
+      </p>
+      <div class="text-center">
+        <img class="img-fluid" src="img/gradients.svg" width="50%" alt="deep learning analysis pipeline with an autoencoder">
+      </div>
+    </div>
+
+    <div class="container" id="paperdiv">
+      <h2>Paper (accepted for publication at WACV 2020)</h2>
+      <a href="s2snet_adversarial_wacv2020.pdf">
+        <div class="thumbs"><img src="img/00.jpeg"><img src="img/01.jpeg"><img src="img/02.jpeg"><img src="img/03.jpeg"><img src="img/04.jpeg"><img src="img/05.jpeg"><img src="img/06.jpeg"><img src="img/07.jpeg"><img src="img/08.jpeg"><img src="img/09.jpeg"></div>
+      </a>
+      <div>
+        <pre class="citation">
+          Cite as: S2SNets \cite{folzpalacio2020}
+
+          @InProceedings{folzpalacio2020,
+            author = {Joachim Folz and Sebastian Palacio and Joern Hees and Andreas Dengel},
+            title = {Adversarial Defense based on Structure-to-Signal Autoencoders},
+            booktitle = {2020 IEEE Winter Conference on Applications of Computer Vision (WACV)},
+            month = {March},
+            year = {2020}
+          }
+        </pre>
+      </div>
+    </div>
+
+    <div class="container" id="defense">
+      <h2>Gradient Analysis & Defense Results</h2>
+
+      <p><img src="img/gradient_analysis.svg" width="100%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3"></p>
+      <p><img src="img/defense.svg" width="50%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3">
+    </div></p>
+
+    <div class="container">
+      <h2>Supplemental Material</h2>
+      <div class="row">
+        <div class="col">
+            <p>Soon...</p>
+        </div>
+        <!--<div class="col-sm-4 text-center">
+          <a href="https://cloud.dfki.de/owncloud/index.php/s/EszjCE5TjpLTsdo"><img src="img/sup-mat.png" width="57%" alt="PDF with supplementary material."></a>
+          <p>Additional experiments and sample reconstructions</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WHe2SJsQ1_8"></iframe>
+          </div>
+          <p>Video summary</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <a href="https://github.com/spalaciob/s2snets-reconstruction"><img src="img/octocat.jpg" width="65%" alt="Example code."></a>
+          <p>Example prototype to reconstruct images using an autoencoder fine-tuned on ResNet50.</p>
+        </div>
+        <div class="col-sm-4 text-center">
+          <a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html"><img src="https://1.bp.blogspot.com/-VCO-pyfErBg/W8Xo8zwn5UI/AAAAAAAAbgM/zSxRNea7H986ALWTWPDGZqxAiksP_Wk4ACLcBGAs/s1600/dl_blackbox.png" width="65%" alt="Blog Post"></a>
+          <p>Checkout our recent blog post about the paper!</p>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Acknowledgments</h2>
+      <p>This work was supported by the BMBF project DeFuseNN (Grant 01IW17002) and the NVIDIA AI Lab (NVAIL) program.</p>
+
+      <p>We would like to express our special gratitude to the members at the MADM group and DLCC for their comments and support.</p>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="logoimg">
+            <a href="http://dl.dfki.de"><img src="img/defusenn.svg" height="70"></a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="logoimg">
+            <a href="http://dl.dfki.de"><img src="img/dlcc-logo.png" height="70"></a>
+          </div>
+        </div>
+        <div class="col">
+          <div class="logoimg">
+            <img src="img/nvidia-logo.png" height="60">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer" class="container">
+
+
+        <p>In compliance with GDPR, please find this copy of <a href="dataprotectionnoticedfki.html">DFKI's Data Protection Regulations.</a>, which this webpage adheres to.</p>
+
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
