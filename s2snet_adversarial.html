@@ -80,57 +80,13 @@
         border: 1px solid #ccc;
         border-radius: 4px;
       }
-
-      /* The ribbons */
-
-      .corner-ribbon{
-        width: 400px;
-        background: #e43;
-        position: absolute;
-        top: 25px;
-        left: -50px;
-        text-align: center;
-        line-height: 50px;
-        letter-spacing: 1px;
-        color: #f0f0f0;
-        transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-      }
-
-      /* Custom styles */
-
-      .corner-ribbon.sticky{
-        position: fixed;
-      }
-
-      .corner-ribbon.shadow{
-        box-shadow: 0 0 3px rgba(0,0,0,.3);
-      }
-
-      .corner-ribbon.top-left{
-        top: 70px;
-        left: -80px;
-        transform: rotate(-45deg);
-        -webkit-transform: rotate(-45deg);
-      }
-
-      .corner-ribbon.white{background: #f0f0f0; color: #555;}
-      .corner-ribbon.black{background: #333;}
-      .corner-ribbon.grey{background: #999;}
-      .corner-ribbon.blue{background: #39d;}
-      .corner-ribbon.green{background: #2c7;}
-      .corner-ribbon.turquoise{background: #1b9;}
-      .corner-ribbon.purple{background: #95b;}
-      .corner-ribbon.red{background: #e43;}
-      .corner-ribbon.orange{background: #e82;}
-      .corner-ribbon.yellow{background: #ec0;}
       
-      #paperdiv img {
+      .thumbs img {
         width: 10%;
       }
       
-      #defense p {
-        text-align: center;
+      .img-fluid {
+        min-width: 60%;
       }
 
     </style>
@@ -138,7 +94,7 @@
     <title>Adversarial Defense based on Structure-to-Signal Autoencoders (WACV 2020)</title>
 
     <!-- SEO: the text snippet often shown beneath your search result below the title -->
-    <meta name="description" content="An autoencoder to prepend to your network showing you what it's looking for (to debug deep networks).">
+    <meta name="description" content="Defend deep neural networks against adversarial attacks using structure-to-signal (S2SNet) autoencoders.">
 
      <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
@@ -152,8 +108,6 @@
 <!--  -->
   </head>
   <body>
-	<a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html">
-    <div class="corner-ribbon top-left sticky black shadow">No Adversaries Here!</div></a>
     <div id="header" class="container">
       <div class="row">
         <div class="col">
@@ -196,7 +150,7 @@
         Adversarial attacks have exposed the intricacies of the complex loss surfaces approximated by neural networks. In this paper, we present a defense strategy against gradient-based attacks, on the premise that input gradients need to expose information about the semantic manifold for attacks to be successful. We propose an architecture based on compressive autoencoders (AEs) with a two-stage training scheme, creating not only an architectural bottleneck but also a representational bottleneck. We show that the proposed mechanism yields robust results against a collection of gradient-based attacks under challenging white-box conditions. This defense is attack-agnostic and can, therefore, be used for arbitrary pre-trained models, while not compromising the original performance. These claims are supported by experiments conducted with state-of-the-art image classifiers (ResNet50 and Inception v3), on the full ImageNet validation set. Experiments, including counterfactual analysis, empirically show that the robustness stems from a shift in the distribution of input gradients, which mitigates the effect of tested adversarial attack methods. Gradients propagated through the proposed AEs represent less semantic information and instead point to low-level structural features.
       </p>
       <div class="text-center">
-        <img class="img-fluid" src="img/gradients.svg" width="50%" alt="deep learning analysis pipeline with an autoencoder">
+        <img class="img-fluid" src="img/gradients.svg" alt="semantic and structural gradients are overlapping subspaces">
       </div>
     </div>
 
@@ -222,35 +176,22 @@
 
     <div class="container" id="defense">
       <h2>Gradient Analysis & Defense Results</h2>
+      <p>When comparing gradients from our autoencoders, no matter how we obtain them - may it be from a classification task or reconstruction of the input - what we get is more similar among the autoencoders than to any classifier on its own.
+And when we look at them we find that the autoencoders emphasize the “structure” of the image rather than its “semantic” content.
+</p>
+      <p class="text-center"><img src="img/gradient_analysis.svg" width="100%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3"></p>
 
-      <p><img src="img/gradient_analysis.svg" width="100%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3"></p>
-      <p><img src="img/defense.svg" width="50%" alt="image reconstruction artifacts for SegNet, AlexNet, VGG16 BN, VGGNet, ResNet-50, Inception v3">
+      <p>This is also reflected in the accuracy when these networks are attacked. We use FGSM, BIM, and Carlini-Wagner attacks to test their robustness. There is no compromise to accuracy with clean inputs and there is a definitive improvement when using just the autoencoder. However, our 2-step training process improves robustness yet again. The structure-to-signal fine-tuning more than doubles accuracy in some cases. This tells us that we are not shattering the gradients, but rather we are reshaping them to be less useful for attackers.</p>
+      
+      <p class="text-center"><img class="img-fluid" src="img/defense.svg" alt="results for attacking undefended classifiers and S2SNets using FGSM, BIM, and Carlini-Wagner">
     </div></p>
 
     <div class="container">
-      <h2>Supplemental Material</h2>
+      <h2>Supplementary Material</h2>
       <div class="row">
-        <div class="col">
-            <p>Soon...</p>
+        <a href="s2snet_adversarial_supplementary.pdf">
+          <div class="thumbs"><img src="img/supp00.jpeg"><img src="img/supp01.jpeg"><img src="img/supp02.jpeg"><img src="img/supp03.jpeg"><img src="img/supp04.jpeg"><img src="img/supp05.jpeg"><img src="img/supp06.jpeg"><img src="img/supp07.jpeg"><img src="img/supp08.jpeg"><img src="img/supp09.jpeg"><img src="img/supp10.jpeg"><img src="img/supp11.jpeg"><img src="img/supp12.jpeg"><img src="img/supp13.jpeg"><img src="img/supp14.jpeg"><img src="img/supp15.jpeg"><img src="img/supp16.jpeg"><img src="img/supp17.jpeg"><img src="img/supp18.jpeg"><img src="img/supp19.jpeg"><img src="img/supp20.jpeg"><img src="img/supp21.jpeg"></div></a>
         </div>
-        <!--<div class="col-sm-4 text-center">
-          <a href="https://cloud.dfki.de/owncloud/index.php/s/EszjCE5TjpLTsdo"><img src="img/sup-mat.png" width="57%" alt="PDF with supplementary material."></a>
-          <p>Additional experiments and sample reconstructions</p>
-        </div>
-        <div class="col-sm-4 text-center">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WHe2SJsQ1_8"></iframe>
-          </div>
-          <p>Video summary</p>
-        </div>
-        <div class="col-sm-4 text-center">
-          <a href="https://github.com/spalaciob/s2snets-reconstruction"><img src="img/octocat.jpg" width="65%" alt="Example code."></a>
-          <p>Example prototype to reconstruct images using an autoencoder fine-tuned on ResNet50.</p>
-        </div>
-        <div class="col-sm-4 text-center">
-          <a href="https://spalaciob.blogspot.com/2018/10/what-do-deep-networks-like-to-see.html"><img src="https://1.bp.blogspot.com/-VCO-pyfErBg/W8Xo8zwn5UI/AAAAAAAAbgM/zSxRNea7H986ALWTWPDGZqxAiksP_Wk4ACLcBGAs/s1600/dl_blackbox.png" width="65%" alt="Blog Post"></a>
-          <p>Checkout our recent blog post about the paper!</p>
-        </div>-->
       </div>
     </div>
 
@@ -265,7 +206,7 @@
       <div class="row">
         <div class="col">
           <div class="logoimg">
-            <a href="http://dl.dfki.de"><img src="img/defusenn.svg" height="70"></a>
+            <a href="https://www.dfki.de/en/web/research/research-departments-and-groups/smart-data-knowledge-services"><img src="img/defusenn.svg" height="70"></a>
           </div>
         </div>
         <div class="col">
@@ -275,18 +216,14 @@
         </div>
         <div class="col">
           <div class="logoimg">
-            <img src="img/nvidia-logo.png" height="60">
+            <a href="https://www.nvidia.com"><img src="img/nvidia-logo.png" height="60"></a>
           </div>
         </div>
       </div>
     </div>
 
     <div id="footer" class="container">
-
-
-        <p>In compliance with GDPR, please find this copy of <a href="dataprotectionnoticedfki.html">DFKI's Data Protection Regulations.</a>, which this webpage adheres to.</p>
-
-
+      <p>In compliance with GDPR, please find this copy of <a href="dataprotectionnoticedfki.html">DFKI's Data Protection Regulations.</a>, which this webpage adheres to.</p>
     </div>
 
     <!-- Optional JavaScript -->
