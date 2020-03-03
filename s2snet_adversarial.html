@@ -88,6 +88,10 @@
       .img-fluid {
         min-width: 60%;
       }
+      
+      .img-full {
+        width: 100% !important;
+      }
 
     </style>
 
@@ -155,22 +159,32 @@
     </div>
 
     <div class="container" id="paperdiv">
-      <h2>Paper (accepted for publication at WACV 2020)</h2>
+      <h2>Paper published @ <a href="http://openaccess.thecvf.com/content_WACV_2020/html/Palacio_Adversarial_Defense_based_on_Structure-to-Signal_Autoencoders_WACV_2020_paper.html">WACV 2020</a></h2>
       <a href="s2snet_adversarial_wacv2020.pdf">
         <div class="thumbs"><img src="img/00.jpeg"><img src="img/01.jpeg"><img src="img/02.jpeg"><img src="img/03.jpeg"><img src="img/04.jpeg"><img src="img/05.jpeg"><img src="img/06.jpeg"><img src="img/07.jpeg"><img src="img/08.jpeg"><img src="img/09.jpeg"></div>
       </a>
       <div>
         <pre class="citation">
-          Cite as: S2SNets \cite{folzpalacio2020}
+Cite as: S2SNets \cite{folzpalacio2020}
 
-          @InProceedings{folzpalacio2020,
-            author = {Joachim Folz and Sebastian Palacio and Joern Hees and Andreas Dengel},
-            title = {Adversarial Defense based on Structure-to-Signal Autoencoders},
-            booktitle = {2020 IEEE Winter Conference on Applications of Computer Vision (WACV)},
-            month = {March},
-            year = {2020}
-          }
+@InProceedings{folzpalacio2020,
+  author = {Folz, Joachim and Palacio, Sebastian and Hees, Joern and Dengel, Andreas},
+  title = {Adversarial Defense based on Structure-to-Signal Autoencoders},
+  booktitle = {The IEEE Winter Conference on Applications of Computer Vision (WACV)},
+  month = {March},
+  year = {2020}
+} 
         </pre>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Poster</h2>
+      <p>Click below to download the PDF version of our poster. Please don't blame us if it crashes your computer. We've created a monster.</p>
+      <div class="row">
+        <div class="thumbs">
+          <a href="s2snet_adversarial_wacv_poster_web.pdf"><img class="img-full" src="img/s2snet_adversarial_wacv_poster_web.png" alt="results for attacking undefended classifiers and S2SNets using FGSM, BIM, and Carlini-Wagner"></a>
+        </div>
       </div>
     </div>
 
@@ -183,8 +197,8 @@ And when we look at them we find that the autoencoders emphasize the “structur
 
       <p>This is also reflected in the accuracy when these networks are attacked. We use FGSM, BIM, and Carlini-Wagner attacks to test their robustness. There is no compromise to accuracy with clean inputs and there is a definitive improvement when using just the autoencoder. However, our 2-step training process improves robustness yet again. The structure-to-signal fine-tuning more than doubles accuracy in some cases. This tells us that we are not shattering the gradients, but rather we are reshaping them to be less useful for attackers.</p>
       
-      <p class="text-center"><img class="img-fluid" src="img/defense.svg" alt="results for attacking undefended classifiers and S2SNets using FGSM, BIM, and Carlini-Wagner">
-    </div></p>
+      <p class="text-center"><img class="img-fluid" src="img/defense.svg" alt="results for attacking undefended classifiers and S2SNets using FGSM, BIM, and Carlini-Wagner"></p>
+    </div>
 
     <div class="container">
       <h2>Supplementary Material</h2>
